@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, #4b5cff, #020617);
+  overflow: hidden;
+}
+
+/* ===== Card ===== */
+.card {
+  width: 380px;
+  padding: 35px 30px;
+  border-radius: 22px;
+  text-align: center;
+  color: #fff;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* ===== Top Icon ===== */
+.icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+/* ===== Heading ===== */
+h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  opacity: 0.75;
+  margin-bottom: 26px;
+}
+
+/* ===== Input ===== */
+.input-box {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* small red dot */
+.dot {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #ff5d5d;
+  border-radius: 50%;
+}
+
+/* ===== Button ===== */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+
+  background: linear-gradient(135deg, #6a7cff, #8b5cf6);
+  margin-bottom: 26px;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== Result / Error Section ===== */
+.error {
+  opacity: 0.9;
+}
+
+.search-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.error p {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.error span {
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 420px) {
+  .card {
+    width: 90%;
+    padding: 28px 22px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+}
