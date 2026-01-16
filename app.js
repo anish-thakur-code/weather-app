@@ -5,10 +5,10 @@ const icon = document.getElementById("weatherIcon");
 
 const API_KEY = "e7c8c2c97fa34732b09115243261601";
 
-button.addEventListener("click", () => {
+function getWeather() {
   const city = cityInput.value.trim();
 
-  if (city === "") {
+  if (!city) {
     result.innerHTML = `
       <div class="search-icon">⚠️</div>
       <p>Please enter a city name</p>
@@ -16,8 +16,15 @@ button.addEventListener("click", () => {
     return;
   }
 
+  result.innerHTML = `
+    <div class="search-icon">⏳</div>
+    <p>Fetching weather...</p>
+  `;
+
   fetch(
-    `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=yes`
+    `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${encodeURIComponent(
+      city
+    )}&aqi=yes`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -30,25 +37,34 @@ button.addEventListener("click", () => {
         return;
       }
 
-      const condition = data.current.condition.text.toLowerCase();
+      const conditionText = data.current.condition.text;
+      const condition = conditionText.toLowerCase();
 
-      // simple icon logic
       if (condition.includes("rain")) icon.textContent = "🌧️";
       else if (condition.includes("cloud")) icon.textContent = "☁️";
-      else if (condition.includes("sun")) icon.textContent = "☀️";
+      else if (condition.includes("sun") || condition.includes("clear"))
+        icon.textContent = "☀️";
       else icon.textContent = "🌤️";
 
       result.innerHTML = `
         <p><strong>${data.location.name}, ${data.location.country}</strong></p>
         <p>🌡 Temperature: ${data.current.temp_c} °C</p>
-        <p>🌥 Condition: ${data.current.condition.text}</p>
+        <p>🌥 Condition: ${conditionText}</p>
         <p>💧 Humidity: ${data.current.humidity}%</p>
       `;
     })
     .catch(() => {
       result.innerHTML = `
         <div class="search-icon">❌</div>
-        <p>Something went wrong</p>
+        <p>Network error. Please try again.</p>
       `;
     });
+}
+
+button.addEventListener("click", getWeather);
+
+cityInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    getWeather();
+  }
 });
